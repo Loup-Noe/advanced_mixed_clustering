@@ -1,9 +1,21 @@
-library(kamila, lib.loc = "/home/loup-noe/Projets/DVRC/Benchmark-Mixed-Clustering/R_lib")
-library("rjson", lib.loc = "/home/loup-noe/Projets/DVRC/Benchmark-Mixed-Clustering/R_lib")
+# Étend le chemin sans supprimer les chemins de base
+.libPaths(c("R_lib", .libPaths()))
+
+# Charge les packages
+library(ggplot2)
+library(clustMD)
+library(kamila)
+library(jsonlite)
+
+if (!file.exists("k.json")) {
+  stop("Fichier k.json manquant")
+}
+
+data <- fromJSON("k.json")
 
 # Python passes k (number of clusters) through a JSON file
-k <- fromJSON(file = "k.json")$n_clusters
-k <- as.numeric(k)
+data <- fromJSON("k.json")
+k <- as.numeric(data$n_clusters)
 
 # Load numerical (continuous) variables and scale
 con_vars <- read.csv(file = "temp_continue.csv")

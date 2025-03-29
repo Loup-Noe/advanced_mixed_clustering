@@ -6,7 +6,7 @@ import pickle
 import numpy as np
 
 # Algorithms
-from algorithms import denseclus,famdkmeans,hierar_gower,kamila,kproto, pretopomd, \
+from algorithms import denseclus,hierar_gower,kamila,kproto, pretopomd, \
                        mixtcomp,modha_spangler, pretopo_FAMD, pretopo_laplacian, pretopo_UMAP, pretopo_PaCMAP, \
                        clustmd, pretopo_louvain
 

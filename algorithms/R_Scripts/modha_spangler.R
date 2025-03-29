@@ -1,4 +1,5 @@
-.libPaths("/home/loup-noe/Projets/DVRC/Benchmark-Mixed-Clustering/R_lib")
+.libPaths("R_lib")
+# .libPaths("/home/loup-noe/Projets/DVRC/Benchmark-Mixed-Clustering/R_lib")
 library(kamila)
 library(rjson)
 

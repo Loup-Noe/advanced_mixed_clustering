@@ -23,6 +23,7 @@ def process(df, **kwargs):
             lambda x: x.replace(x.unique(),list(range(1,1+len(x.unique())))))
     #print(df[categorical_columns])
     df2[categorical_columns].to_csv('temp_cat.csv',index=False)
+    print("Fichier 'temp_cat.csv' écrit à :", os.path.abspath('temp_cat.csv'))
 
     df2[numerical_columns].to_csv('temp_continue.csv',index=False)
 

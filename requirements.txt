@@ -1,26 +1,26 @@
-numpy
-pandas
+numpy==1.24.2
+pandas==1.5.3
 memory-profiler
-scikit-learn
-scipy
+scikit-learn==1.2.1
+scipy==1.10.1
 # os
 # sys
-kmodes
+kmodes==0.12.2
 # glob2
 # fnmatch
-plotly
-kaleido
+plotly==5.13.0
+kaleido==0.2.1
 pyclustertend
-scipy
-umap
-pacmap
-prince
-scikit-network
-Amazon-DenseClus
-streamlit_option_menu
-streamlit
-rpy2
-gower
-yellowbrick
-
-
+scipy==1.10.1
+umap==0.1.1
+pacmap==0.7.0
+prince==0.7.1
+scikit-network==0.28.3
+Amazon-DenseClus==0.0.9
+streamlit_option_menu==0.3.2
+streamlit==1.19.0
+rpy2==3.5.9
+networkx==3.0
+seaborn==0.12.2
+gower==0.1.2
+yellowbrick==1.5

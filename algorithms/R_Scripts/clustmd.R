@@ -1,6 +1,9 @@
-.libPaths("/home/loup-noe/Projets/DVRC/Benchmark-Mixed-Clustering/R_lib")
+# .libPaths("/home/loup-noe/Projets/DVRC/Benchmark-Mixed-Clustering/R_lib")
+.libPaths("R_lib")
+
 library(clustMD)
 library(rjson)
+
 
 # Python passes k (number of clusters) through a JSON file
 k <- fromJSON(file = "k.json")$n_clusters

@@ -128,6 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# R library
+R_lib/
 
 # mprofile reports
 mprof*
