@@ -10,9 +10,9 @@ with st.sidebar:
     choice = option_menu("Page",
                     [
                         "Land Page",
+                        "Compare Clustering",
                         "Compare Dimension Reductions",
-                        "Visualize Dimension Reductions",
-                        "Compare Clustering"
+                        "Visualize Clusters with Dimension Reductions"
                     ])
 
 
@@ -20,5 +20,5 @@ if choice == "Compare Dimension Reductions":
     compare_dimr.page()
 if choice == "Compare Clustering":
     compare_clustering.page_2()
-if choice == "Visualize Dimension Reductions":
+if choice == "Visualize Clusters with Dimension Reductions":
     visualize_dimr.page()

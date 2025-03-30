@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -33,6 +34,12 @@ def page():
 
     with cols[0].container():
         df = get_data()
+
+        # Check if the file exists before trying to read it
+        if not os.path.exists("labels.csv"):
+            st.error("❌ 'labels.csv' not found.\n\nPlease run the **Compare Clustering** page first to generate the clustering labels.")
+            st.stop()
+
         # Load cluster labels
         cluster_labels = pd.read_csv('labels.csv')
 
@@ -41,22 +48,40 @@ def page():
             st.error("Data and cluster labels do not align. Please check your data.")
             st.stop()
 
+    with cols[1].container():
+
         # Select clusterization
         cluster_options = cluster_labels.columns
         selected_cluster = st.selectbox("Select Clusterization", cluster_options)
 
         def plot_clusters(famd_emb, color):
-            if -1 in color.values:
-
-                tmp_color_scale = color_scale_if_outliers
+            if color.isna().any():
+                # Case 1: NaNs in color → gray
+                famd_emb["cluster"] = color.fillna("NaN")
+                st.plotly_chart(
+                    px.scatter_3d(famd_emb, 0, 1, 2, color="cluster",
+                                  color_discrete_sequence=["gray"])
+                )
+            elif all(color == -1):
+                # Case 2: All outliers (-1) → gray
+                famd_emb["cluster"] = "All outliers"
+                st.plotly_chart(
+                    px.scatter_3d(famd_emb, 0, 1, 2, color="cluster",
+                                  color_discrete_sequence=["gray"])
+                )
+            elif -1 in color.values:
+                # Case 3: Mix of -1 and valid → outlier scale
+                st.plotly_chart(
+                    px.scatter_3d(famd_emb, 0, 1, 2, color=color,
+                                  color_continuous_scale=color_scale_if_outliers)
+                )
             else:
-                tmp_color_scale = color_scale
-            st.plotly_chart(
-                px.scatter_3d(famd_emb, 0, 1, 2, color=cluster_labels[selected_cluster],
-                              color_continuous_scale=tmp_color_scale)
-            )
+                # Case 4: Normal case
+                st.plotly_chart(
+                    px.scatter_3d(famd_emb, 0, 1, 2, color=color,
+                                  color_continuous_scale=color_scale)
+                )
 
-    with cols[1].container():
         tab_famd, tab_lap, tab_um, tab_pm, tab_lv = st.tabs(
             ['FAMD', 'Laplacian Eigenmaps', 'UMAP', 'PaCMAP', 'Louvain'])
 
